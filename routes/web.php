@@ -39,10 +39,10 @@ Route::middleware([
         return Inertia::render('Application/Wallet');
     })->name('wallets');
 
-     //Actives routes
-     Route::get('/actives', function () {
-        return Inertia::render('Application/Active');
-    })->name('actives');
+     //Assets routes
+     Route::get('/assets', function () {
+        return Inertia::render('Application/Asset');
+    })->name('assets');
 
      //Cryptos routes
      Route::get('/cryptos', function () {
