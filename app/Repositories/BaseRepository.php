@@ -28,16 +28,14 @@ abstract class BaseRepository
         return $this->model->findOrFail($id);
     }
 
-    public function update($id, array $data)
+    public function update($item, array $data)
     {
-        $item = $this->find($id);
         $item->update($data);
         return $item;
     }
 
-    public function delete($id)
+    public function delete($item)
     {
-        $item = $this->find($id);
         $item->delete();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AssetRequest;
 use App\Services\AssetService;
 use Inertia\Inertia;
+use Exception;
 
 class AssetController extends Controller
 {
@@ -42,9 +43,13 @@ class AssetController extends Controller
         return response()->json($asset);
     }
 
-    public function destroy($id)
+    public function destroy($assetId)
     {
-        $this->assetService->deleteAsset($id);
-        return response()->json(['message' => 'Asset deleted']);
+        try {
+            $this->assetService->deleteAsset($assetId);
+            return response()->json(['message' => 'Ativo removido com sucesso']);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()], $e->getCode());
+        }
     }
 }

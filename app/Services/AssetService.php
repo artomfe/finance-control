@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Repositories\AssetRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
 
 class AssetService
 {
@@ -35,6 +37,16 @@ class AssetService
 
     public function deleteAsset($id)
     {
-        $this->assetRepository->delete($id);
+        $asset = $this->assetRepository->find($id);
+
+        if (!$asset) {
+            throw new Exception('Ativo não encontrado', 404);
+        }
+
+        try {
+            $this->assetRepository->delete($asset);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao remover ativo', 500);
+        }
     }
 }

@@ -40,8 +40,10 @@ Route::middleware([
         return Inertia::render('Application/Wallet');
     })->name('wallets');
 
-     //Assets routes
+    //Assets routes
+    Route::delete('/assets/{asset}', [AssetController::class, 'destroy'])->name('assets.destroy');
     Route::get('/assets', [AssetController::class, 'index'])->name('assets');
+
 
      //Cryptos routes
      Route::get('/cryptos', function () {
