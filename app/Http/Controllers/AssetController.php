@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AssetRequest;
 use App\Services\AssetService;
-use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AssetController extends Controller
 {
@@ -18,7 +18,10 @@ class AssetController extends Controller
     public function index()
     {
         $assets = $this->assetService->getAllAssets();
-        return response()->json($assets);
+        
+        return Inertia::render('Application/Asset', [
+            'assets' => $assets
+        ]);
     }
 
     public function store(AssetRequest $request)

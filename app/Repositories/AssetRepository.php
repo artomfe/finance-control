@@ -10,4 +10,9 @@ class AssetRepository extends BaseRepository
     {
         parent::__construct($asset);
     }
+
+    public function getAllWithPagination()
+    {
+        return $this->model->paginate(10);
+    }
 }

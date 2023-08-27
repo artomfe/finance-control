@@ -15,7 +15,7 @@ class AssetService
 
     public function getAllAssets()
     {
-        return $this->assetRepository->getAll();
+        return $this->assetRepository->getAllWithPagination();
     }
 
     public function createAsset(array $data)
