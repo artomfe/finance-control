@@ -29,7 +29,28 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    //Dashboard routes
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    //Wallets routes
+    Route::get('/wallets', function () {
+        return Inertia::render('Application/Wallet');
+    })->name('wallets');
+
+     //Actives routes
+     Route::get('/actives', function () {
+        return Inertia::render('Application/Active');
+    })->name('actives');
+
+     //Cryptos routes
+     Route::get('/cryptos', function () {
+        return Inertia::render('Application/Crypto');
+    })->name('cryptos');
+
+     //Selic routes
+     Route::get('/selic', function () {
+        return Inertia::render('Application/Selic');
+    })->name('selic');
 });
