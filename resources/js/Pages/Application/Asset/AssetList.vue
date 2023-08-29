@@ -13,7 +13,13 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-8">
+
+                <Link href="/assets/create"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Cadastrar Ativo
+                </Link>
+
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-8 mt-4">
                     <h1 class="text-2xl font-semibold text-center mb-4">Lista de Ativos</h1>
 
                     <table class="min-w-full divide-y divide-gray-200">
@@ -35,7 +41,6 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex space-x-2">
                                     <button
-                                        @click="editAsset(asset.id)"
                                         class="px-3 py-1 bg-yellow-500 text-white rounded"
                                     >
                                         Editar
@@ -100,9 +105,6 @@ export default {
     },
   },
   methods: {
-    editAsset(assetId) {
-      // Lógica para redirecionar para a página de edição do ativo
-    },
     async removeAsset(assetId) {
       const confirmed = confirm('Tem certeza que deseja remover este ativo?');
       if (!confirmed) return;

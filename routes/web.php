@@ -41,17 +41,20 @@ Route::middleware([
     })->name('wallets');
 
     //Assets routes
+    Route::get('/assets/create', [AssetController::class, 'create'])->name('assets.create');
+    Route::post('/assets/store', [AssetController::class, 'store'])->name('assets.store');
+    Route::get('/assets/{asset}/edit', [AssetController::class, 'edit'])->name('assets.edit');
+    Route::put('/assets/{asset}/update', [AssetController::class, 'update'])->name('assets.update');
     Route::delete('/assets/{asset}', [AssetController::class, 'destroy'])->name('assets.destroy');
     Route::get('/assets', [AssetController::class, 'index'])->name('assets');
 
-
-     //Cryptos routes
-     Route::get('/cryptos', function () {
+    //Cryptos routes
+    Route::get('/cryptos', function () {
         return Inertia::render('Application/Crypto');
     })->name('cryptos');
 
-     //Selic routes
-     Route::get('/selic', function () {
+    //Selic routes
+    Route::get('/selic', function () {
         return Inertia::render('Application/Selic');
     })->name('selic');
 });

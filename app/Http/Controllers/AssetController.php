@@ -20,9 +20,14 @@ class AssetController extends Controller
     {
         $assets = $this->assetService->getAllAssets();
         
-        return Inertia::render('Application/Asset', [
+        return Inertia::render('Application/Asset/AssetList', [
             'assets' => $assets
         ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Application/Asset/AssetForm');
     }
 
     public function store(AssetRequest $request)
@@ -31,7 +36,7 @@ class AssetController extends Controller
         return response()->json($asset, 201);
     }
 
-    public function show($id)
+    public function edit($id)
     {
         $asset = $this->assetService->getAssetById($id);
         return response()->json($asset);
