@@ -10,4 +10,9 @@ class WalletRepository extends BaseRepository
     {
         parent::__construct($wallet);
     }
+
+    public function getAllData()
+    {
+        return $this->model->with(['broker'])->get();
+    }
 }

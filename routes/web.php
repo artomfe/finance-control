@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AssetController;
+use App\Http\Controllers\WalletController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,9 +37,7 @@ Route::middleware([
     })->name('dashboard');
 
     //Wallets routes
-    Route::get('/wallets', function () {
-        return Inertia::render('Application/Wallet');
-    })->name('wallets');
+    Route::get('/wallets', [WalletController::class, 'index'])->name('wallets');
 
     //Assets routes
     Route::get('/assets/create', [AssetController::class, 'create'])->name('assets.create');
