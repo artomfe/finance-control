@@ -1,6 +1,7 @@
 <script setup>
     import AppLayout from '@/Layouts/AppLayout.vue';
-    import { Link } from '@inertiajs/vue3'
+    import { Link } from '@inertiajs/vue3';
+    import Paggination from '@/Components/Paggination.vue';
 </script>
 
 <template>
@@ -57,35 +58,7 @@
                         </tbody>
                     </table>
                     
-                    <div class="mt-4 flex justify-center">
-                        <Link
-                            :href="assets.prev_page_url"
-                            class="px-4 py-2 mr-2 bg-blue-500 text-white rounded"
-                            :class="{ 'opacity-50 cursor-not-allowed': !assets.prev_page_url }"
-                        >
-                            Anterior
-                        </Link>
-
-                        <div class="flex items-center space-x-2">
-                            <template v-for="page in filteredLinks" :key="page.label">
-                                <Link
-                                    :href="page.url"
-                                    class="px-3 py-2 rounded"
-                                    :class="{ 'bg-blue-500 text-white': page.active, 'text-gray-500': !page.active }"
-                                >
-                                    {{ page.label }}
-                                </Link>
-                            </template>
-                        </div>
-
-                        <Link
-                            :href="assets.next_page_url"
-                            class="px-4 py-2 ml-2 bg-blue-500 text-white rounded"
-                            :class="{ 'opacity-50 cursor-not-allowed': !assets.next_page_url }"
-                        >
-                            Próximo
-                        </Link>
-                    </div>
+                    <Paggination :prev="assets.prev_page_url" :next="assets.next_page_url" :links="assets.links"/>
                 </div>
             </div>
         </div>
@@ -98,11 +71,6 @@ import { useToast } from 'vue-toastification';
 export default {
   props: {
     assets: Object
-  },
-  computed: {
-    filteredLinks() {
-      return this.assets.links.filter((page) => page.label !== "&laquo; Previous" && page.label !== "Next &raquo;").slice(0, 4);
-    },
   },
   methods: {
     async removeAsset(assetId) {

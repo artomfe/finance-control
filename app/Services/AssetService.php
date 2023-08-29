@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Repositories\AssetRepository;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
 
 class AssetService
