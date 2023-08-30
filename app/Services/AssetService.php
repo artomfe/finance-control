@@ -8,10 +8,12 @@ use Exception;
 class AssetService
 {
     protected $assetRepository;
+    protected $crawlerService;
 
-    public function __construct(AssetRepository $assetRepository)
+    public function __construct(AssetRepository $assetRepository, CrawlerService $crawlerService)
     {
         $this->assetRepository = $assetRepository;
+        $this->crawlerService = $crawlerService;
     }
 
     public function getAllAssets()
@@ -19,19 +21,17 @@ class AssetService
         return $this->assetRepository->getAllWithPagination();
     }
 
-    public function createAsset(array $data)
+    public function updateAssetQuotes()
     {
-        return $this->assetRepository->create($data);
-    }
+        $assets = $this->assetRepository->getAll();
 
-    public function getAssetById($id)
-    {
-        return $this->assetRepository->find($id);
-    }
+        foreach ($assets as $asset) {
+            $currentQuote = $this->crawlerService->getValueFromURL($asset->code);
 
-    public function updateAsset($id, array $data)
-    {
-        return $this->assetRepository->update($id, $data);
+            $currentQuote = preg_replace('/[^\d\.]/', '',$currentQuote);
+
+            $asset->update(['current_quote' => $currentQuote]);
+        }
     }
 
     public function deleteAsset($id)

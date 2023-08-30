@@ -30,24 +30,6 @@ class AssetController extends Controller
         return Inertia::render('Application/Asset/AssetForm');
     }
 
-    public function store(AssetRequest $request)
-    {
-        $asset = $this->assetService->createAsset($request->validated());
-        return response()->json($asset, 201);
-    }
-
-    public function edit($id)
-    {
-        $asset = $this->assetService->getAssetById($id);
-        return response()->json($asset);
-    }
-
-    public function update(AssetRequest $request, $id)
-    {
-        $asset = $this->assetService->updateAsset($id, $request->validated());
-        return response()->json($asset);
-    }
-
     public function destroy($assetId)
     {
         try {
@@ -55,6 +37,15 @@ class AssetController extends Controller
             return response()->json(['message' => 'Ativo removido com sucesso']);
         } catch (Exception $e) {
             return response()->json(['message' => $e->getMessage()], $e->getCode());
+        }
+    }
+
+    public function updateAssetQuotes() {
+        try {
+            $this->assetService->updateAssetQuotes();
+            return response()->json(['message' => 'Ativos atualizados com sucesso!']);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()]);
         }
     }
 }

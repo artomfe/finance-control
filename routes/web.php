@@ -42,6 +42,7 @@ Route::middleware([
     //Assets routes
     Route::get('/assets/create', [AssetController::class, 'create'])->name('assets.create');
     Route::post('/assets/store', [AssetController::class, 'store'])->name('assets.store');
+    Route::post('/assets/update-prices', [AssetController::class, 'updateAssetQuotes'])->name('assets.updatePrices');
     Route::get('/assets/{asset}/edit', [AssetController::class, 'edit'])->name('assets.edit');
     Route::put('/assets/{asset}/update', [AssetController::class, 'update'])->name('assets.update');
     Route::delete('/assets/{asset}', [AssetController::class, 'destroy'])->name('assets.destroy');

@@ -20,6 +20,13 @@
                     Cadastrar Ativo
                 </Link>
 
+                <button
+                    @click="updateAssets()"
+                    class="ml-4 bg-violet-500 hover:bg-violet-700 text-white py-2 px-4 rounded"
+                >
+                    Atualizar ativos
+                </button>
+
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-8 mt-4">
                     <h1 class="text-2xl font-semibold text-center mb-4">Lista de Ativos</h1>
 
@@ -41,17 +48,21 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ asset.current_quote }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex space-x-2">
-                                    <button
-                                        class="px-3 py-1 bg-yellow-500 text-white rounded"
-                                    >
-                                        Editar
-                                    </button>
-                                    <button
-                                        @click="removeAsset(asset.id)"
-                                        class="px-3 py-1 bg-red-500 text-white rounded"
-                                    >
-                                        Remover
-                                    </button>
+                                        <Link href="/assets/detail"
+                                            class="px-3 py-1 bg-green-500 hover:bg-green-700 text-white rounded">
+                                            Detalhes
+                                        </Link>
+                                        <button
+                                            class="px-3 py-1 bg-yellow-500 hover:bg-yellow-700 text-white rounded"
+                                        >
+                                            Editar
+                                        </button>
+                                        <button
+                                            @click="removeAsset(asset.id)"
+                                            class="px-3 py-1 bg-red-500 hover:bg-red-700 text-white rounded"
+                                        >
+                                            Remover
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -74,22 +85,39 @@ export default {
   },
   methods: {
     async removeAsset(assetId) {
-      const confirmed = confirm('Tem certeza que deseja remover este ativo?');
-      if (!confirmed) return;
+        const confirmed = confirm('Tem certeza que deseja remover este ativo?');
+        if (!confirmed) return;
 
-      const toast = useToast();
+        const toast = useToast();
 
-      try {
-        await this.$inertia.delete(route('assets.destroy', assetId));
-        // Atualizar a lista de ativos após a remoção
-        this.$inertia.reload();
+        try {
+            await this.$inertia.delete(route('assets.destroy', assetId));
+            // Atualizar a lista de ativos após a remoção
+            this.$inertia.reload();
 
-        toast.success('Ativo removido com sucesso')
+            toast.success('Ativo removido com sucesso')
 
-      } catch (error) {
-        console.error('Erro ao remover o ativo:', error);
-        toast.success('Erro ao remover o ativo')
-      }
+        } catch (error) {
+            console.error('Erro ao remover o ativo:', error);
+            toast.success('Erro ao remover o ativo')
+        }
+    },
+    async updateAssets() {
+        const toast = useToast();
+
+        try {
+            const response = await this.$inertia.post(route('assets.updatePrices'));
+
+            if (response.message) {
+                toast.success(response.message);
+            }
+
+            // Atualizar a lista de ativos após a atualização
+            this.$inertia.reload();
+        } catch (error) {
+            console.error('Erro ao atualizar:', error);
+            toast.error('Erro ao atualizar ativos');
+        }
     },
   },
 }
