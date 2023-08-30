@@ -18,6 +18,11 @@ abstract class BaseRepository
         return $this->model->all();
     }
 
+    public function getAllWithPagination($pagination = 10)
+    {
+        return $this->model->paginate(10);
+    }
+
     public function create(array $data)
     {
         return $this->model->create($data);

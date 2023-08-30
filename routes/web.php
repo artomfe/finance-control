@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AssetController;
+use App\Http\Controllers\CryptoController;
 use App\Http\Controllers\WalletController;
 
 /*
@@ -49,9 +50,9 @@ Route::middleware([
     Route::get('/assets', [AssetController::class, 'index'])->name('assets');
 
     //Cryptos routes
-    Route::get('/cryptos', function () {
-        return Inertia::render('Application/Crypto');
-    })->name('cryptos');
+    Route::delete('/cryptos/{asset}', [CryptoController::class, 'destroy'])->name('cryptos.destroy');
+    Route::get('/cryptos', [CryptoController::class, 'index'])->name('cryptos');
+
 
     //Selic routes
     Route::get('/selic', function () {
