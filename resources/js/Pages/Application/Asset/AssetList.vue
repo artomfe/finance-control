@@ -78,6 +78,7 @@
 
 <script>
 import { useToast } from 'vue-toastification';
+import NProgress from 'nprogress';
 
 export default {
   props: {
@@ -103,13 +104,14 @@ export default {
         }
     },
     async updateAssets() {
+        NProgress.start();
         const toast = useToast();
 
         try {
-            const response = await this.$inertia.post(route('assets.updatePrices'));
+            const response = await axios.post(route('assets.updatePrices'));
 
-            if (response.message) {
-                toast.success(response.message);
+            if (response.data.message) {
+                toast.success(response.data.message);
             }
 
             // Atualizar a lista de ativos após a atualização
@@ -117,6 +119,8 @@ export default {
         } catch (error) {
             console.error('Erro ao atualizar:', error);
             toast.error('Erro ao atualizar ativos');
+        } finally {
+            NProgress.done();
         }
     },
   },
