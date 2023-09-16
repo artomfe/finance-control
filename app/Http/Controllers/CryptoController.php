@@ -39,12 +39,12 @@ class CryptoController extends Controller
         }
     }
 
-    // public function updateAssetQuotes() {
-    //     try {
-    //         $this->assetService->updateAssetQuotes();
-    //         return response()->json(['message' => 'Ativos atualizados com sucesso!']);
-    //     } catch (Exception $e) {
-    //         return response()->json(['message' => $e->getMessage()]);
-    //     }
-    // }
+    public function updateCryptoPrices() {
+        try {
+            $this->cryptoService->updateCryptoPrices();
+            return response()->json(['message' => 'Cryptomoedas atualizadas com sucesso!']);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()]);
+        }
+    }
 }

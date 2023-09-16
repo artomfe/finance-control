@@ -20,12 +20,12 @@
                     Cadastrar Crypto
                 </Link>
 
-                <!-- <button
-                    @click="updateAssets()"
+                <button
+                    @click="updateCryptos()"
                     class="ml-4 bg-violet-500 hover:bg-violet-700 text-white py-2 px-4 rounded"
                 >
                     Atualizar Cryptos
-                </button> -->
+                </button>
 
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-8 mt-4">
                     <h1 class="text-2xl font-semibold text-center mb-4">Lista de Cryptos</h1>
@@ -56,7 +56,7 @@
                                             Editar
                                         </button>
                                         <button
-                                            @click="removeACrypto(crypto.id)"
+                                            @click="removeCrypto(crypto.id)"
                                             class="px-3 py-1 bg-red-500 hover:bg-red-700 text-white rounded"
                                         >
                                             Remover
@@ -91,7 +91,7 @@ export default {
 
         try {
             await this.$inertia.delete(route('cryptos.destroy', cryptoId));
-            // Atualizar a lista de ativos após a remoção
+            // Atualizar a lista de cryptos após a remoção
             this.$inertia.reload();
 
             toast.success('Crypto removida com sucesso')
@@ -101,26 +101,26 @@ export default {
             toast.success('Erro ao remover a crypto')
         }
     },
-    // async updateAssets() {
-    //     NProgress.start();
-    //     const toast = useToast();
+    async updateCryptos() {
+        NProgress.start();
+        const toast = useToast();
 
-    //     try {
-    //         const response = await axios.post(route('assets.updatePrices'));
+        try {
+            const response = await axios.post(route('cryptos.updatePrices'));
 
-    //         if (response.data.message) {
-    //             toast.success(response.data.message);
-    //         }
+            if (response.data.message) {
+                toast.success(response.data.message);
+            }
 
-    //         // Atualizar a lista de ativos após a atualização
-    //         this.$inertia.reload();
-    //     } catch (error) {
-    //         console.error('Erro ao atualizar:', error);
-    //         toast.error('Erro ao atualizar ativos');
-    //     } finally {
-    //         NProgress.done();
-    //     }
-    // },
+            // Atualizar a lista de cryptos após a atualização
+            this.$inertia.reload();
+        } catch (error) {
+            console.error('Erro ao atualizar:', error);
+            toast.error('Erro ao atualizar cryptos');
+        } finally {
+            NProgress.done();
+        }
+    },
   },
 }
 </script>

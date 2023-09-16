@@ -38,6 +38,7 @@ Route::middleware([
     })->name('dashboard');
 
     //Wallets routes
+    Route::get('/wallets/detail/{walletId}', [WalletController::class, 'detail'])->name('wallets.detail');
     Route::get('/wallets', [WalletController::class, 'index'])->name('wallets');
 
     //Assets routes
@@ -50,7 +51,8 @@ Route::middleware([
     Route::get('/assets', [AssetController::class, 'index'])->name('assets');
 
     //Cryptos routes
-    Route::delete('/cryptos/{asset}', [CryptoController::class, 'destroy'])->name('cryptos.destroy');
+    Route::delete('/cryptos/{crypto}', [CryptoController::class, 'destroy'])->name('cryptos.destroy');
+    Route::post('/cryptos/update-prices', [CryptoController::class, 'updateCryptoPrices'])->name('cryptos.updatePrices');
     Route::get('/cryptos', [CryptoController::class, 'index'])->name('cryptos');
 
 
