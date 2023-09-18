@@ -1,5 +1,6 @@
 <script setup>
-    import AppLayout from '@/Layouts/AppLayout.vue';
+    import CardSvg from '@/Components/CardSvg.vue';
+import AppLayout from '@/Layouts/AppLayout.vue';
 </script>
 
 <template>
@@ -9,6 +10,46 @@
                 Ativos da Carteira
             </h2>
         </template>
+
+        <article class="ml-6 mr-6">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 items-center flex space-x-10">
+                <div class="flex items-center justify-around p-6 bg-white xs:w-full md:w-1/5
+                        rounded-xl space-x-2 mt-10 shadow-lg">
+                    <div>
+                        <span class="text-sm font-semibold text-gray-400">Total investido</span>
+                        <h1 class="text-2xl font-bold">R$ {{formatNumber(wallet.totalAmount)}}</h1>
+                    </div>
+                </div>
+                <div class="flex items-center justify-around p-6 bg-white w-1/2 md:w-1/5 rounded-xl
+                        space-x-2 mt-10 shadow-lg">
+                    <div>
+                        <span class="text-sm font-semibold text-gray-400">Dividendos</span>
+                        <h1 class="text-2xl font-bold">R$ {{formatNumber(wallet.totalEarning)}}</h1>
+                    </div>
+                </div>
+                <div class="flex items-center justify-around p-6 bg-white w-1/2 md:w-1/5 rounded-xl
+                        space-x-2 mt-10 shadow-lg">
+                    <div>
+                        <span class="text-sm font-semibold text-gray-400">Total Atual</span>
+                        <h1 class="text-2xl font-bold">R$ {{formatNumber(wallet.currentTotal)}}</h1>
+                    </div>
+                </div>
+                <div class="flex items-center justify-around p-6 bg-white w-1/2 md:w-1/5 rounded-xl
+                        space-x-2 mt-10 shadow-lg">
+                    <div>
+                        <span class="text-sm font-semibold text-gray-400">Variação</span>
+                        <h1 class="text-2xl font-bold">{{wallet.profitPercentage}}%</h1>
+                    </div>
+                </div>
+                <div class="flex items-center justify-around p-6 bg-white w-1/2 md:w-1/5 rounded-xl
+                        space-x-2 mt-10 shadow-lg">
+                    <div>
+                        <span class="text-sm font-semibold text-gray-400">Percentual Total</span>
+                        <h1 class="text-2xl font-bold">{{wallet.profitTotalPercentage}}%</h1>
+                    </div>
+                </div>
+            </div>
+        </article>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -34,7 +75,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ active.asset.code }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ active.quantity }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ active.average_price.toFixed(2) }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ active.asset.current_quote }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ active.asset.current_quote.toFixed(2) }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ active.total_amount }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ active.current_total.toFixed(2) }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ active.total_earning }}</td>
@@ -59,17 +100,18 @@ export default {
         walletAssets: Array,
         wallet: Object
     },
-  computed: {
-    assets() {
-      // Clone a matriz 'assets' para não alterar a original
-      const sortedAssets = [...this.walletAssets];
-
-      // Ordene os ativos com base no campo 'current_total'
-      sortedAssets.sort((a, b) => b.current_total - a.current_total);
-
-      // Retorne os ativos ordenados
-      return sortedAssets;
-    }
-  }
+    computed: {
+        assets() {
+            const sortedAssets = [...this.walletAssets];
+            // Ordene os ativos com base no campo 'current_total'
+            sortedAssets.sort((a, b) => b.current_total - a.current_total);
+            return sortedAssets;
+        }
+    },
+    methods: {
+        formatNumber(value) {
+            return value.toFixed(2).replace('.', ',');
+        },
+    },
 }
 </script>
