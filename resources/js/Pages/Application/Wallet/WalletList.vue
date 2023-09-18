@@ -36,11 +36,11 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ wallet.broker.name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex space-x-2">
-                                    <Link :href="'/wallets/detail/'+wallet.id"
-                                        class="px-3 py-1 bg-green-500 text-white rounded"
-                                    >
-                                        Mais detalhes
-                                    </Link>
+                                        <Link :href="'/wallets/assets/'+wallet.id"
+                                            class="px-3 py-1 bg-green-500 text-white rounded"
+                                        >
+                                            Mais detalhes
+                                        </Link>
                                     </div>
                                 </td>
                             </tr>

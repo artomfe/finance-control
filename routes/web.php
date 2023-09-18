@@ -38,7 +38,8 @@ Route::middleware([
     })->name('dashboard');
 
     //Wallets routes
-    Route::get('/wallets/detail/{walletId}', [WalletController::class, 'detail'])->name('wallets.detail');
+    Route::get('/wallets/assets/{walletId}', [WalletController::class, 'assetDetail'])->name('wallets.assetDetail');
+    Route::get('/wallets/cryptos/{walletId}', [WalletController::class, 'cryptoDetail'])->name('wallets.cryptoDetail');
     Route::get('/wallets', [WalletController::class, 'index'])->name('wallets');
 
     //Assets routes

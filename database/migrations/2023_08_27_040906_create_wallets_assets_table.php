@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('quantity')->nullable();
             $table->float('average_price')->nullable();
             $table->float('total_amount')->nullable();
+            $table->float('total_earnings')->nullable();
             $table->timestamps();
 
             $table->foreign('asset_id', 'aw_ibfk_assets')

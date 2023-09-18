@@ -23,12 +23,22 @@ class WalletController extends Controller
         ]);
     }
 
-    public function detail($walletId)
+    public function assetDetail($walletId)
     {
-        $actives = $this->walletService->getWalletsActives($walletId);
+        $data = $this->walletService->getWalletAssets($walletId);
         
-        return Inertia::render('Application/Wallet/WalletDetail', [
-            'actives' => $actives
+        return Inertia::render('Application/Wallet/WalletAssetDetail', [
+            'walletAssets' => $data['walletAssets'],
+            'wallet' => $data['walletData']
+        ]);
+    }
+
+    public function cryptoDetail($walletId)
+    {
+        $cryptos = $this->walletService->getWalletCryptos($walletId);
+        
+        return Inertia::render('Application/Wallet/WalletAssetDetail', [
+            'cryptos' => $cryptos
         ]);
     }
 }

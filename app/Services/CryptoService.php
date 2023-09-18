@@ -30,9 +30,6 @@ class CryptoService
         foreach ($cryptos as $crypto) {
             $currentQuote = $this->getCryptoValueBySlug($crypto->slug);
 
-            Log::debug('crypto: '. $crypto->slug);
-            Log::debug('value: '. $currentQuote);
-
             $crypto->update(['current_quote' => $currentQuote]);
 
             sleep(3);

@@ -15,4 +15,9 @@ class WalletRepository extends BaseRepository
     {
         return $this->model->with(['broker'])->get();
     }
+
+    public function getWalletById($walletId) 
+    {
+        return $this->model::findOrFail($walletId);
+    }
 }
