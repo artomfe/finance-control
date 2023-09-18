@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\CryptoRepository;
 use GuzzleHttp\Client;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class CryptoService
 {
@@ -28,6 +29,9 @@ class CryptoService
 
         foreach ($cryptos as $crypto) {
             $currentQuote = $this->getCryptoValueBySlug($crypto->slug);
+
+            Log::debug('crypto: '. $crypto->slug);
+            Log::debug('value: '. $currentQuote);
 
             $crypto->update(['current_quote' => $currentQuote]);
 

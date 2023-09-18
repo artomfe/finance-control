@@ -17,4 +17,9 @@ class WalletService
     {
         return $this->walletRepository->getAllData();
     }
+
+    public function getWalletsActives($walletId) 
+    {
+        
+    }
 }

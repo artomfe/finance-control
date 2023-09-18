@@ -22,4 +22,13 @@ class WalletController extends Controller
             'wallets' => $wallets
         ]);
     }
+
+    public function detail($walletId)
+    {
+        $actives = $this->walletService->getWalletsActives($walletId);
+        
+        return Inertia::render('Application/Wallet/WalletDetail', [
+            'actives' => $actives
+        ]);
+    }
 }
