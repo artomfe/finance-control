@@ -68,7 +68,6 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dividendos</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valorização</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">P/PV</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -82,9 +81,6 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                                 <td class="px-6 py-4 whitespace-nowrap">{{ active.total_earning }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-green-300" :class="{'text-red-300': active.profit_percentage < 0}">
                                     {{ active.profit_percentage }}%
-                                </td>
-                                <td class="px-6 py-4 bold whitespace-nowrap text-green-500" :class="{'text-red-500': active.profit_percentage_total < 0}">
-                                    {{ active.profit_percentage_total }}%
                                 </td>
                                 <td class="px-6 py-4 bold whitespace-nowrap text-green-500" :class="{'text-red-500': active.profit_percentage_total < 0}">
                                     {{ active.profit_percentage_total }}%
