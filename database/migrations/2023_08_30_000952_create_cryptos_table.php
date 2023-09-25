@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('code', 50);
             $table->string('slug', 50);
-            $table->float('current_quote')->nullable();
-            $table->float('current_quote_dollar')->nullable();
+            $table->float('current_quote', 20,12)->nullable();
+            $table->float('current_quote_dollar', 20,12)->nullable();
             $table->timestamps();
         });
     }

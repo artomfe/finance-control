@@ -14,15 +14,20 @@ return new class extends Migration
         Schema::create('movements', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('asset_id');
+            $table->unsignedBigInteger('crypto_id');
             $table->unsignedBigInteger('wallet_id');
             $table->integer('quantity');
-            $table->float('quota_value');
+            $table->float('quota_value', 20,12);
             $table->float('total_amount')->nullable();
             $table->date('movement_date')->nullable();
             $table->timestamps();
 
             $table->foreign('asset_id', 'movements_ibfk_assets')
                 ->references('id')->on('assets')
+                ->onUpdate('CASCADE')->onDelete('RESTRICT');
+
+            $table->foreign('crypto_id', 'movements_ibfk_cryptos')
+                ->references('id')->on('cryptos')
                 ->onUpdate('CASCADE')->onDelete('RESTRICT');
 
             $table->foreign('wallet_id', 'movements_ibfk_wallets')

@@ -18,6 +18,26 @@
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Cadastrar Carteira
                 </Link>
+                <Link href="/movements/asset"
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold ml-4 py-2 px-4 rounded">
+                    Comprar Ativo
+                </Link>
+                <Link href="/movements/crypto"
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold ml-4 py-2 px-4 rounded">
+                    Comprar Crypto
+                </Link>
+                <Link href="/movements-sells/asset"
+                    class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold ml-4 py-2 px-4 rounded">
+                    Vender Ativo
+                </Link>
+                <Link href="/movements-sells/crypto"
+                    class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold ml-4 py-2 px-4 rounded">
+                    Vender Crypto
+                </Link>
+                <Link href="/yields"
+                    class="bg-purple-500 hover:bg-purple-700 text-white font-bold ml-4 py-2 px-4 rounded">
+                    Rendimentos
+                </Link>
 
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-8 mt-4">
                     <h1 class="text-2xl font-semibold text-center mb-4">Lista de Carteiras</h1>

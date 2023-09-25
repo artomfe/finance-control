@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\CryptoController;
 use App\Http\Controllers\WalletController;
+use App\Http\Controllers\MovementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +57,8 @@ Route::middleware([
     Route::post('/cryptos/update-prices', [CryptoController::class, 'updateCryptoPrices'])->name('cryptos.updatePrices');
     Route::get('/cryptos', [CryptoController::class, 'index'])->name('cryptos');
 
+    //Movements routes
+    Route::get('/movements/{type}', [MovementController::class, 'index'])->name('movements');
 
     //Selic routes
     Route::get('/selic', function () {
