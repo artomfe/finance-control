@@ -19,7 +19,7 @@
                                     focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="ativo" v-model="form.active_id">
                             <option v-for="item in actives" :value="item.id" :key="item.id">
-                                {{ item.ativo }}
+                                {{ item.code }}
                             </option>
                         </select>
                     </div>
@@ -35,7 +35,7 @@
                                     focus:bg-white focus:border-gray-500"
                                 id="carteira" v-model="form.wallet_id">
                             <option v-for="item in wallets" :value="item.id" :key="item.id">
-                                {{ item.nome }}
+                                {{ item.name }}
                             </option>
                         </select>
                     </div>
@@ -118,10 +118,23 @@ export default {
             axios.post(this.route('movements.store'), this.form)
                 .then(response => {
                     this.message = response.data.message
+                    this.cleanForm()
                 })
                 .catch(error => {
                     console.error("There was an error!", error);
                 });
+        },
+        cleanForm() {
+            let date = this.form.movement_date
+
+            this.form = this.$inertia.form({
+                active_id: null,
+                wallet_id: null,
+                quantity: 0,
+                quota_value: 0,
+                total_amount: 0,
+                movement_date: date,
+            })
         }
     },
     computed: {

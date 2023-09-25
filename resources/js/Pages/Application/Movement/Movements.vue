@@ -33,18 +33,18 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <!-- <tr v-for="movement in movements.data" :key="movement.id">
-                                <td class="px-6 py-4 whitespace-nowrap">{{ movement }}</td>
+                            <tr v-for="movement in movements.data" :key="movement.id">
+                                <td class="px-6 py-4 whitespace-nowrap">{{ movement.asset.name || movement.crypto.name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ movement.wallet.name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ movement.quota_value }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ movement.quantity }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ movement.total_amount }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ movement.movement_date }}</td>
-                            </tr> -->
+                            </tr>
                         </tbody>
                     </table>
                     
-                    <!-- <Paggination :prev="movements.prev_page_url" :next="movements.next_page_url" :links="movements.links"/> -->
+                    <Paggination :prev="movements.prev_page_url" :next="movements.next_page_url" :links="movements.links"/>
                 </div>
             </div>
         </div>

@@ -16,6 +16,12 @@ class MovementController extends Controller
 
     public function index($type)
     {
-        return Inertia::render('Application/Movement/Movements');
+        $data = $this->service->getMovementPage($type);
+
+        return Inertia::render('Application/Movement/Movements', [
+            'wallets' => $data['wallets'],
+            'actives' => $data['actives'],
+            'movements' => $data['movements']
+        ]);
     }
 }
