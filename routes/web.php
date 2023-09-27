@@ -59,6 +59,7 @@ Route::middleware([
 
     //Movements routes
     Route::get('/movements/{type}', [MovementController::class, 'index'])->name('movements');
+    Route::post('/movements/store', [MovementController::class, 'store'])->name('movements.store');
 
     //Selic routes
     Route::get('/selic', function () {

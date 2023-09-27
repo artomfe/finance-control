@@ -21,7 +21,13 @@ class MovementController extends Controller
         return Inertia::render('Application/Movement/Movements', [
             'wallets' => $data['wallets'],
             'actives' => $data['actives'],
-            'movements' => $data['movements']
+            'movements' => $data['movements'],
+            'type' => $type
         ]);
+    }
+
+    public function store()
+    {
+
     }
 }

@@ -95,14 +95,19 @@
 </template>
 
 <script>
+import { useToast } from 'vue-toastification';
+import NProgress from 'nprogress';
+
 export default {
     props: {
         actives: Array,
-        wallets: Array
+        wallets: Array,
+        activeType: String
     },
     data() {
         return {
             form: this.$inertia.form({
+                type: this.activeType,
                 active_id: null,
                 wallet_id: null,
                 quantity: 0,
@@ -115,14 +120,26 @@ export default {
     },
     methods: {
         submit() {
+            NProgress.start();
+            const toast = useToast();
+
             axios.post(this.route('movements.store'), this.form)
                 .then(response => {
-                    this.message = response.data.message
                     this.cleanForm()
+
+                    if (response.data.message) {
+                        toast.success(response.data.message);
+                    }
+
+                    // Atualizar a lista de ativos após a atualização
+                    this.$inertia.reload();
                 })
                 .catch(error => {
                     console.error("There was an error!", error);
-                });
+                    toast.error('Erro ao atualizar ativos');
+                })
+
+                NProgress.done();
         },
         cleanForm() {
             let date = this.form.movement_date
