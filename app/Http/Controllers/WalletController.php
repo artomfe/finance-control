@@ -35,10 +35,11 @@ class WalletController extends Controller
 
     public function cryptoDetail($walletId)
     {
-        $cryptos = $this->walletService->getWalletCryptos($walletId);
+        $data = $this->walletService->getWalletCryptos($walletId);
         
-        return Inertia::render('Application/Wallet/WalletAssetDetail', [
-            'cryptos' => $cryptos
+        return Inertia::render('Application/Wallet/WalletCryptoDetail', [
+            'walletCryptos' => $data['walletCryptos'],
+            'wallet' => $data['walletData']
         ]);
     }
 }

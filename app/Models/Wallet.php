@@ -36,6 +36,11 @@ class Wallet extends Model
         return $this->hasMany(WalletsAsset::class);
     }
 
+    public function walletsCryptos()
+    {
+        return $this->hasMany(WalletsCrypto::class);
+    }
+
     public function walletsEarnings()
     {
         return $this->hasMany(WalletsEarning::class);

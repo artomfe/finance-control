@@ -23,13 +23,6 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                 <div class="flex items-center justify-around p-6 bg-white w-1/2 md:w-1/5 rounded-xl
                         space-x-2 mt-10 shadow-lg">
                     <div>
-                        <span class="text-sm font-semibold text-gray-400">Dividendos</span>
-                        <h1 class="text-2xl font-bold">R$ {{formatNumber(wallet.totalEarning)}}</h1>
-                    </div>
-                </div>
-                <div class="flex items-center justify-around p-6 bg-white w-1/2 md:w-1/5 rounded-xl
-                        space-x-2 mt-10 shadow-lg">
-                    <div>
                         <span class="text-sm font-semibold text-gray-400">Total Atual</span>
                         <h1 class="text-2xl font-bold">R$ {{formatNumber(wallet.currentTotal)}}</h1>
                     </div>
@@ -41,20 +34,13 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                         <h1 class="text-2xl font-bold">{{wallet.profitPercentage}}%</h1>
                     </div>
                 </div>
-                <div class="flex items-center justify-around p-6 bg-white w-1/2 md:w-1/5 rounded-xl
-                        space-x-2 mt-10 shadow-lg">
-                    <div>
-                        <span class="text-sm font-semibold text-gray-400">Percentual Total</span>
-                        <h1 class="text-2xl font-bold">{{wallet.profitTotalPercentage}}%</h1>
-                    </div>
-                </div>
             </div>
         </article>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-8 mt-4">
-                    <h1 class="text-2xl font-semibold text-center mb-4">Ativos da carteira</h1>
+                    <h1 class="text-2xl font-semibold text-center mb-4">Cryptos da carteira</h1>
 
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -65,25 +51,19 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Preço Atual</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total investido</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Atual</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dividendos</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valorização</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <tr v-for="active in assets" :key="active.id">
-                                <td class="px-6 py-4 whitespace-nowrap">{{ active.asset.code }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ active.quantity }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ active.average_price.toFixed(2) }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ active.asset.current_quote.toFixed(2) }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ active.total_amount }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ active.current_total.toFixed(2) }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ active.total_earning }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-green-300" :class="{'text-red-300': active.profit_percentage < 0}">
-                                    {{ active.profit_percentage }}%
-                                </td>
-                                <td class="px-6 py-4 bold whitespace-nowrap text-green-500" :class="{'text-red-500': active.profit_percentage_total < 0}">
-                                    {{ active.profit_percentage_total }}%
+                            <tr v-for="crypto in cryptos" :key="crypto.id">
+                                <td class="px-6 py-4 whitespace-nowrap">{{ crypto.crypto.code }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ crypto.quantity }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ crypto.average_price.toFixed(2) }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ crypto.crypto.current_quote.toFixed(2) }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ crypto.total_amount }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ crypto.current_total.toFixed(2) }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-green-300" :class="{'text-red-300': crypto.profit_percentage < 0}">
+                                    {{ crypto.profit_percentage }}%
                                 </td>
                             </tr>
                         </tbody>
@@ -97,15 +77,15 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 <script>
 export default {
     props: {
-        walletAssets: Array,
+        walletCryptos: Array,
         wallet: Object
     },
     computed: {
-        assets() {
-            const sortedAssets = [...this.walletAssets];
+        cryptos() {
+            const sortedCryptos = [...this.walletCryptos];
             // Ordene os ativos com base no campo 'current_total'
-            sortedAssets.sort((a, b) => b.current_total - a.current_total);
-            return sortedAssets;
+            sortedCryptos.sort((a, b) => b.current_total - a.current_total);
+            return sortedCryptos;
         }
     },
     methods: {
