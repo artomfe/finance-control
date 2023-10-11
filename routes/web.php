@@ -7,6 +7,7 @@ use App\Http\Controllers\AssetController;
 use App\Http\Controllers\CryptoController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\MovementController;
+use App\Http\Controllers\SelicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,7 +63,5 @@ Route::middleware([
     Route::post('/movements/store', [MovementController::class, 'store'])->name('movements.store');
 
     //Selic routes
-    Route::get('/selic', function () {
-        return Inertia::render('Application/Selic');
-    })->name('selic');
+    Route::get('/selic', [SelicController::class, 'index'])->name('selic');
 });
