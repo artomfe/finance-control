@@ -16,10 +16,12 @@ class SelicController extends Controller
 
     public function index()
     {
-        $selics = $this->service->getAll();
+        $data = $this->service->getAll();
         
         return Inertia::render('Application/Selic/List', [
-            'selics' => $selics
+            'selics' => $data['selics'],
+            'investedAmount' => $data['investedAmount'],
+            'yieldAmount' => $data['yieldAmount']
         ]);
     }
 

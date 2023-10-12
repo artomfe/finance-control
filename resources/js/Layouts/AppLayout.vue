@@ -63,6 +63,9 @@ const logout = () => {
                                 <NavLink :href="route('selic')" :active="route().current('selic')">
                                     Selic
                                 </NavLink>
+                                <NavLink :href="route('selic')" :active="route().current('selic')">
+                                    Finances
+                                </NavLink>
                             </div>
                         </div>
 

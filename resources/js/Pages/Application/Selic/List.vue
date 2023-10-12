@@ -39,7 +39,6 @@ import { Link } from '@inertiajs/vue3';
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Investido</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rendimento</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Percentual</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
                             </tr>
                         </thead>
@@ -48,12 +47,44 @@ import { Link } from '@inertiajs/vue3';
                                 <td class="px-6 py-4 whitespace-nowrap">{{ selic.name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ selic.amount }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ selic.yield }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ selic.percentage_yield }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ (selic.amount + selic.yield).toFixed(2) }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
+                <article class="ml-6 mr-6">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 items-center flex space-x-10">
+                        <div class="flex items-center justify-around p-6 bg-white xs:w-full md:w-1/5
+                                rounded-xl space-x-2 mt-10 shadow-lg">
+                            <div>
+                                <span class="text-sm font-semibold text-gray-400">Total investido</span>
+                                <h1 class="text-2xl font-bold">R$ {{ formatNumber(investedAmount) }}</h1>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-around p-6 bg-white w-1/2 md:w-1/5 rounded-xl
+                                space-x-2 mt-10 shadow-lg">
+                            <div>
+                                <span class="text-sm font-semibold text-gray-400">Rendimento total</span>
+                                <h1 class="text-2xl font-bold">R$ {{ formatNumber(yieldAmount) }}</h1>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-around p-6 bg-white w-1/2 md:w-1/5 rounded-xl
+                                space-x-2 mt-10 shadow-lg">
+                            <div>
+                                <span class="text-sm font-semibold text-gray-400">Total Atual</span>
+                                <h1 class="text-2xl font-bold">R$ {{ totalInvested() }} </h1>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-around p-6 bg-white w-1/2 md:w-1/5 rounded-xl
+                                space-x-2 mt-10 shadow-lg">
+                            <div>
+                                <span class="text-sm font-semibold text-gray-400">Percentual Rendimento</span>
+                                <h1 class="text-2xl font-bold">{{ totalYield() }}%</h1>
+                            </div>
+                        </div>
+                    </div>
+                </article>
             </div>
         </div>
     </AppLayout>
@@ -62,7 +93,22 @@ import { Link } from '@inertiajs/vue3';
 <script>
 export default {
     props: {
-        selics: Object
+        selics: Object,
+        investedAmount: Object,
+        yieldAmount: Object
+    },
+    methods: {
+        formatNumber(value) {
+            return value.toFixed(2).replace('.', ',');
+        },
+        totalInvested() {
+            let total = this.investedAmount + this.yieldAmount;
+            return this.formatNumber(total);
+        },
+        totalYield() {
+            let total = (this.yieldAmount / this.investedAmount) * 100;
+            return this.formatNumber(total);
+        }
     },
 }
 </script>

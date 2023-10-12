@@ -15,6 +15,14 @@ class SelicService
 
     public function getAll()
     {
-        return $this->repository->getAll();
+        $selics = $this->repository->getAll();
+        $investedAmount = $this->repository->getInvestedAmount();
+        $yieldAmount = $this->repository->getYieldAmount();
+
+        return [
+            'selics' => $selics,
+            'investedAmount' => $investedAmount->total,
+            'yieldAmount' => $yieldAmount->total
+        ];
     }
 }
