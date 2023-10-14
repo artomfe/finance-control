@@ -13,7 +13,7 @@ class Selic extends Model
         'name',
         'amount',
         'yield',
-        'percentage_yield',
+        'percentage_yield'
     ];
 
     public function selicsMovements()
