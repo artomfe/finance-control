@@ -1,6 +1,5 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
@@ -13,10 +12,12 @@ import { Link } from '@inertiajs/vue3';
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <Link href="/assets/create"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button
+                    @click="updateFinances()"
+                    class="ml-4 bg-violet-500 hover:bg-violet-700 text-white py-2 px-4 rounded"
+                >
                     Atualizar valores
-                </Link>
+                </button>
 
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-8 mt-4">
                     <h1 class="text-2xl font-semibold text-center mb-4">Lista de Finances</h1>
@@ -91,7 +92,7 @@ export default {
         formatNumber(value) {
             return value.toFixed(2).replace('.', ',');
         },
-        async updateAssets() {
+        async updateFinances() {
             NProgress.start();
             const toast = useToast();
 

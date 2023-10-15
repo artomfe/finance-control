@@ -26,6 +26,8 @@ class FinanceController extends Controller
 
     public function update()
     {
+        $this->service->updateFinances();
 
+        return response()->json(['message' => 'Dados financeiros atualizados com sucesso!']);
     }
 }
