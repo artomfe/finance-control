@@ -11,6 +11,7 @@ class Movement extends Model
 
     protected $fillable = [
         'asset_id',
+        'crypto_id',
         'wallet_id',
         'quantity',
         'quota_value',
@@ -19,6 +20,11 @@ class Movement extends Model
     ];
 
     public function asset()
+    {
+        return $this->belongsTo(Asset::class);
+    }
+
+    public function crypto()
     {
         return $this->belongsTo(Asset::class);
     }

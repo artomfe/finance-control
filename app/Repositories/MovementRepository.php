@@ -13,6 +13,9 @@ class MovementRepository extends BaseRepository
 
     public function getByWallets($walletIds)
     {
-       return $this->model::whereIn('wallet_id', $walletIds)->get();
+        return $this->model::whereIn('wallet_id', $walletIds)
+            ->with(['wallet', 'asset', 'crypto'])
+            ->orderBy('id', 'DESC')
+            ->paginate(10);
     }
 }
