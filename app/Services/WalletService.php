@@ -37,7 +37,7 @@ class WalletService
         // Calcule a porcentagem de lucro/prejuízo para cada ativo e atualize os valores no array
         foreach ($wallet->walletsAssets as $active) {
             $totalAmount = $active->total_amount;
-            $totalEarning = $active->total_earning;
+            $totalEarning = $active->total_earnings;
             $currentTotal = $active->asset->current_quote * $active->quantity;
 
             // Atualize os valores no array
@@ -46,15 +46,16 @@ class WalletService
             $walletData['currentTotal'] += $currentTotal;
 
             $active->current_total = (float) $currentTotal;
-            $active->profit_percentage = number_format(($currentTotal - $totalAmount) / $totalAmount * 100, 2);
-            $active->profit_percentage_total = number_format(($currentTotal - ($totalAmount - $totalEarning)) / $totalAmount * 100, 2);
+            $active->profit_percentage = number_format((($currentTotal - $totalAmount) / $totalAmount) * 100, 2);
+            $invested = $totalAmount - $totalEarning;
+            $active->profit_percentage_total = number_format((($currentTotal - $invested) / $invested) * 100, 2);
         }
 
         $totalWithEarning = $walletData['totalAmount'] - $walletData['totalEarning'];
 
         // Calcule a porcentagem de lucro/prejuízo global após a iteração
         $walletData['profitPercentage'] = number_format((($walletData['currentTotal'] - $walletData['totalAmount']) / $walletData['totalAmount']) * 100, 2);
-        $walletData['profitTotalPercentage'] = number_format((($walletData['currentTotal'] - $totalWithEarning) / $walletData['totalAmount']) * 100, 2);
+        $walletData['profitTotalPercentage'] = number_format((($walletData['currentTotal'] - $totalWithEarning) / $totalWithEarning) * 100, 2);
 
         return  [
             'walletAssets' => $wallet->walletsAssets,

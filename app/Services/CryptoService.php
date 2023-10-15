@@ -79,6 +79,7 @@ class CryptoService
                 throw new Exception('Criptomoeda não encontrada.');
             }
         } catch (Exception $e) {
+            Log::debug($e->getMessage());
             throw new Exception('Erro ao buscar dados da criptomoeda pelo slug: ' . $e->getMessage());
         }
     }

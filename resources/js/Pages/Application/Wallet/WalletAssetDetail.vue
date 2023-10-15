@@ -79,7 +79,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                                 <td class="px-6 py-4 whitespace-nowrap">{{ active.asset.current_quote.toFixed(2) }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ active.total_amount }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ active.current_total.toFixed(2) }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ active.total_earning }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ active.total_earnings }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-green-300" :class="{'text-red-300': active.profit_percentage < 0}">
                                     {{ active.profit_percentage }}%
                                 </td>

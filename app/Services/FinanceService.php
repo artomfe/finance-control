@@ -19,7 +19,7 @@ class FinanceService
         $values = $this->repository->getFinanceValues();
 
         if(isset($values->total)) {
-            $values->percent = - ($values->invested / $values->total  - 1 ) * 100;
+            $values->percent = (($values->total - $values->invested) / $values->invested) * 100;
         }
 
         return [
@@ -34,9 +34,9 @@ class FinanceService
 
         foreach($finances as $f) {
             $data = array();
-            if($f->investment_type == 'Ativo') {
+            if($f->type == 'Ativo') {
                 $data = $this->calculateActiveFinance($f->investment_id);
-            }else if($f->investment_type == 'Crypto') {
+            }else if($f->type == 'Crypto') {
                 $data = $this->calculateCryptoFinance($f->investment_id);
             }else {
                 $data = $this->calculateSelicFinance($f->investment_id);
@@ -61,8 +61,8 @@ class FinanceService
 
         $invested = $financeData['invested'] - $financeData['earning'];
 
-        $percentage = - ($invested / $total  - 1 ) * 100;
-
+        $percentage = (($total - $invested) / $invested) * 100;
+        
         return [
             'invested' => $invested,
             'total' => $total,
@@ -80,7 +80,7 @@ class FinanceService
             $total += round($price, 2);
         }
 
-        $percentage = - ($financeData['invested'] / $total  - 1 ) * 100;
+        $percentage = (($total - $financeData['invested']) / $financeData['invested']) * 100;
 
         return [
             'invested' => $financeData['invested'],
@@ -94,7 +94,11 @@ class FinanceService
 
         $total = $selic->amount + $selic->yield;
 
-        $percentage = - ($selic->amount / $total  - 1 ) * 100;
+        if($selic->amount == 0) {
+            $percentage = 100;
+        } else {
+            $percentage = (($total - $selic->amount) / $selic->amount) * 100;
+        }
 
         return [
             'invested' => $selic->amount,

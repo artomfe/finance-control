@@ -39,6 +39,7 @@ import { Link } from '@inertiajs/vue3';
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Investido</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rendimento</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Percentual</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
                             </tr>
                         </thead>
@@ -47,6 +48,7 @@ import { Link } from '@inertiajs/vue3';
                                 <td class="px-6 py-4 whitespace-nowrap">{{ selic.name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ selic.amount }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ selic.yield }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-green-300">{{ selic.percentage_yield }}%</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ (selic.amount + selic.yield).toFixed(2) }}</td>
                             </tr>
                         </tbody>
