@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('finances', function (Blueprint $table) {
             $table->id();
-            $table->string('investment_type');
+            $table->string('investment_type', 100);
             $table->unsignedBigInteger('investment_id');
             $table->float('invested_amount')->nullable();
             $table->float('total_amount')->nullable();
             $table->float('percentage')->nullable();
+            $table->string('type', 50);
             $table->timestamps();
         });
     }

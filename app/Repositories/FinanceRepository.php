@@ -17,7 +17,7 @@ class FinanceRepository extends BaseRepository
 
     public function getAllData()
     {
-        return $this->model->with(['finance'])->get();
+        return $this->model->with('investment')->get();
     }
 
     public function getFinanceValues()

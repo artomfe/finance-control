@@ -50,4 +50,9 @@ class Wallet extends Model
     {
         return $this->hasMany(MovementsSale::class);
     }
+
+    public function finances()
+    {
+        return $this->morphMany(Finance::class, 'investment');
+    }
 }

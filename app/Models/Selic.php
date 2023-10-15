@@ -25,4 +25,9 @@ class Selic extends Model
     {
         return $this->hasMany(SelicsYield::class);
     }
+
+    public function finances()
+    {
+        return $this->morphMany(Finance::class, 'investment');
+    }
 }

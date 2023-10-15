@@ -17,13 +17,9 @@ class Finance extends Model
         'percentage'
     ];
 
-    public function finance()
+    public function investment()
     {
-        if($this->investment_type == 'Selic') {
-            return $this->belongsTo(Selic::class, "investment_id", "id");
-        } else {
-            return $this->belongsTo(Wallet::class, "investment_id", "id");
-        }
+        return $this->morphTo();
     }
 
 }

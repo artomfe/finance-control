@@ -34,8 +34,11 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             <tr v-for="finance in finances" :key="finance.id">
-                                <td class="px-6 py-4 whitespace-nowrap">{{ finance.finance.name }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ finance.investment_type }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                   <span v-if="finance.investment">{{ finance.investment.name }}</span> 
+                                   <span v-else>NOTHING</span> 
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ finance.type }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ finance.invested_amount.toFixed(2) }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ finance.total_amount.toFixed(2) }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-green-300" :class="{'text-red-300': finance.percentage < 0}">

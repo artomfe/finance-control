@@ -80,7 +80,9 @@ import { Link } from '@inertiajs/vue3';
                                 space-x-2 mt-10 shadow-lg">
                             <div>
                                 <span class="text-sm font-semibold text-gray-400">Percentual Rendimento</span>
-                                <h1 class="text-2xl font-bold">{{ totalYield() }}%</h1>
+                                <h1 class="text-2xl font-bold text-green-300" :class="{'text-red-300': totalYield() < 0}" >
+                                    {{ totalYield() }}%
+                                </h1>
                             </div>
                         </div>
                     </div>
