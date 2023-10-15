@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('movements_sales', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('asset_id');
-            $table->unsignedBigInteger('crypto_id');
+            $table->unsignedBigInteger('asset_id')->nullable();
+            $table->unsignedBigInteger('crypto_id')->nullable();
             $table->unsignedBigInteger('wallet_id');
-            $table->integer('quantity');
+            $table->float('quantity', 20,8);
             $table->float('initial_quota_value', 20,12);
             $table->float('sale_quota_value', 20,12);
             $table->float('total_amount')->nullable();

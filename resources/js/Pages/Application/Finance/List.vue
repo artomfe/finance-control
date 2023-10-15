@@ -46,7 +46,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                     </table>
                 </div>
 
-                <article class="ml-6 mr-6">
+                <article class="ml-6 mr-6" v-if="values.invested">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 items-center flex space-x-10">
                         <div class="flex items-center justify-around p-6 bg-white xs:w-full md:w-1/3
                                 rounded-xl space-x-2 mt-10 shadow-lg">

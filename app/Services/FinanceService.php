@@ -18,7 +18,9 @@ class FinanceService
         $finances = $this->repository->getAllData();
         $values = $this->repository->getFinanceValues();
 
-        $values->percent = - ($values->invested / $values->total  - 1 ) * 100;
+        if(isset($values->total)) {
+            $values->percent = - ($values->invested / $values->total  - 1 ) * 100;
+        }
 
         return [
             'finances' => $finances,
