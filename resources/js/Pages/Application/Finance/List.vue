@@ -1,5 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
+import FinanceChart from '@/Charts/FinanceChart.vue';
 </script>
 
 <template>
@@ -72,6 +73,14 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                             </div>
                         </div>
                     </div>
+                </article>
+
+                <article class="flex items-center center bg-white mt-10 mb-10">
+                    <finance-chart 
+                        :finances="finances" 
+                        class="flex items-center center md:w-2/3"
+                        style="margin-left: 12rem;"
+                    />
                 </article>
 
             </div>
