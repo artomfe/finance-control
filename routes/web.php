@@ -9,6 +9,7 @@ use App\Http\Controllers\WalletController;
 use App\Http\Controllers\MovementController;
 use App\Http\Controllers\SelicController;
 use App\Http\Controllers\FinanceController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,9 +37,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     //Dashboard routes
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
 
     //Wallets routes
     Route::get('/wallets/assets/{walletId}', [WalletController::class, 'assetDetail'])->name('wallets.assetDetail');

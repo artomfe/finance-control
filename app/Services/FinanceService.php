@@ -34,9 +34,9 @@ class FinanceService
 
         foreach($finances as $f) {
             $data = array();
-            if($f->type == 'Ativo') {
+            if($f->type == 'FIIS' || $f->type == 'Ações') {
                 $data = $this->calculateActiveFinance($f->investment_id);
-            }else if($f->type == 'Crypto') {
+            }else if($f->type == 'Criptomoedas') {
                 $data = $this->calculateCryptoFinance($f->investment_id);
             }else {
                 $data = $this->calculateSelicFinance($f->investment_id);

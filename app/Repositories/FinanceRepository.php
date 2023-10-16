@@ -7,6 +7,7 @@ use App\Models\Selic;
 use App\Models\WalletsAsset;
 use App\Models\WalletsCrypto;
 use App\Models\WalletsEarning;
+use Illuminate\Support\Facades\DB;
 
 class FinanceRepository extends BaseRepository
 {
@@ -67,5 +68,14 @@ class FinanceRepository extends BaseRepository
     public function getSelicFinanceData($selicId)
     {
         return Selic::where('id', $selicId)->first();
+    }
+
+    public function getFinanceDataByType()
+    {
+        return $this->model
+            ->select('type', DB::raw('SUM(invested_amount) as invested'), DB::raw('SUM(total_amount) as total'))
+            ->groupBy('type')
+            ->orderBy('total', 'DESC')
+            ->get();
     }
 }
