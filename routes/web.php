@@ -7,6 +7,7 @@ use App\Http\Controllers\AssetController;
 use App\Http\Controllers\CryptoController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\MovementController;
+use App\Http\Controllers\WalletEarningController;
 use App\Http\Controllers\SelicController;
 use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\DashboardController;
@@ -61,6 +62,9 @@ Route::middleware([
     //Movements routes
     Route::get('/movements/{type}', [MovementController::class, 'index'])->name('movements');
     Route::post('/movements/store', [MovementController::class, 'store'])->name('movements.store');
+
+    //Yields routes
+    Route::get('/yields', [WalletEarningController::class, 'index'])->name('yields');
 
     //Selic routes
     Route::get('/selics', [SelicController::class, 'index'])->name('selics');
