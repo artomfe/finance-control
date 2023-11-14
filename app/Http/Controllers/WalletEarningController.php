@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\WalletEarningService;
 use Inertia\Inertia;
+use App\Services\WalletEarningService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class WalletEarningController extends Controller
 {
@@ -19,12 +21,16 @@ class WalletEarningController extends Controller
         $data = $this->service->getEarningPageData();
 
         return Inertia::render('Application/WalletEarning/Earnings', [
-            'earnings' => $data['earnings']
+            'earnings' => $data['earnings'],
+            'actives' => $data['actives'],
+            'wallets' => $data['wallets']
         ]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-
+        Log::debug('Check request');
+        Log::debug($request->all());
+        return response()->json(['message' => 'CHEGOU AQUI!']);
     }
 }

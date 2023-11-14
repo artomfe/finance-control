@@ -65,6 +65,7 @@ Route::middleware([
 
     //Yields routes
     Route::get('/yields', [WalletEarningController::class, 'index'])->name('yields');
+    Route::post('/yields/store', [WalletEarningController::class, 'store'])->name('yields.store');
 
     //Selic routes
     Route::get('/selics', [SelicController::class, 'index'])->name('selics');

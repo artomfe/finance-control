@@ -21,7 +21,7 @@
                     Voltar
                 </Link>
 
-                <!-- <EarnigForm :actives="actives" :wallets="wallets" :active-type="type"/> -->
+                <EarningForm :actives="actives" :wallets="wallets"/>
 
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-8 mt-4">
                     <h1 class="text-2xl font-semibold text-center mb-4">Lista de Rendimentos</h1>
@@ -59,7 +59,9 @@
 <script>
 export default {
     props: {
-        earnings: Object
+        earnings: Object,
+        actives: Object,
+        wallets: Object,
     },
 }
 </script>

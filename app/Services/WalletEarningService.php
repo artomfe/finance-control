@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Asset;
+use App\Models\Wallet;
 use App\Repositories\WalletEarningRepository;
 
 class WalletEarningService
@@ -16,9 +18,13 @@ class WalletEarningService
     public function getEarningPageData() 
     {
         $earnings = $this->repository->getPageData();
+        $actives = Asset::all();
+        $wallets = Wallet::all();
 
         return [
-            'earnings' => $earnings
+            'earnings' => $earnings,
+            'actives' => $actives,
+            'wallets' => $wallets
         ];
     }
 }
