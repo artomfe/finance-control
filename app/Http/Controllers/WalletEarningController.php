@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WalletEarningRequest;
 use Inertia\Inertia;
 use App\Services\WalletEarningService;
-use Illuminate\Http\Request;
+use Exception;
 use Illuminate\Support\Facades\Log;
 
 class WalletEarningController extends Controller
@@ -27,10 +28,20 @@ class WalletEarningController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(WalletEarningRequest $request)
     {
-        Log::debug('Check request');
-        Log::debug($request->all());
-        return response()->json(['message' => 'CHEGOU AQUI!']);
+        try {
+            $data = $request->all();
+
+            Log::debug('Check request');
+            Log::debug($data);
+        
+            $this->service->saveEarning($data);
+        
+            return response()->json(['message' => 'CHEGOU AQUI!']);
+        } catch (Exception $e) {
+            Log::error('Erro ao salvar dividendos: ', $e);
+            return response()->json(['message' => 'ERROR!'], 500);
+        }
     }
 }

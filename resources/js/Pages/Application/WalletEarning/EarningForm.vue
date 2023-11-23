@@ -17,7 +17,7 @@
                         <select class="block appearance-none w-full bg-gray-200 border border-gray-200
                                     text-gray-700 py-3 px-4 pr-8 rounded leading-tight
                                     focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="ativo" v-model="form.active_id">
+                                id="ativo" v-model="form.asset_id">
                             <option v-for="item in actives" :value="item.id" :key="item.id">
                                 {{ item.code }}
                             </option>
@@ -49,7 +49,7 @@
                             border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none
                             focus:bg-white focus:border-gray-500"
                             id="data" type="text" placeholder="DD/MM/AAAA"
-                            v-model="form.earning_date">
+                            v-model="form.payment_date">
                 </div>
                 <div class="w-full md:w-1/2 lg:w-1/3 px-3 mb-6  mb-2">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -71,7 +71,7 @@
                             border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none
                             focus:bg-white focus:border-gray-500"
                             id="valor_cota" type="text" placeholder="Valor da cota"
-                            v-model="form.quota_value">
+                            v-model="form.received_quota">
                 </div>
                 <div class="w-full md:w-1/2 lg:w-1/3 px-3 mb-6  mb-2">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -93,7 +93,7 @@
                             border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none
                             focus:bg-white focus:border-gray-500"
                             id="data" type="text" placeholder="DD/MM/AAAA"
-                            v-model="form.earning_com_date">
+                            v-model="form.com_date">
                 </div>
             </div>
             <div class="flex items-center justify-end mt-2">
@@ -117,13 +117,13 @@ export default {
     data() {
         return {
             form: this.$inertia.form({
-                active_id: null,
+                asset_id: null,
                 wallet_id: null,
                 quantity: 0,
-                quota_value: 0,
+                received_quota: 0,
                 total_amount: 0,
-                earning_date: null,
-                earning_com_date: null,
+                payment_date: null,
+                com_date: null,
             }),
             message: null,
         }
@@ -152,23 +152,24 @@ export default {
                 NProgress.done();
         },
         cleanForm() {
-            let date = this.form.earning_date
-            let comDate = this.form.earning_com_date
+            let date = this.form.payment_date
+            let comDate = this.form.com_date
+            let wallet = this.form.wallet_id
 
             this.form = this.$inertia.form({
-                active_id: null,
-                wallet_id: null,
+                asset_id: null,
+                wallet_id: wallet,
                 quantity: 0,
-                quota_value: 0,
+                received_quota: 0,
                 total_amount: 0,
-                earning_date: date,
-                earning_com_date: comDate
+                payment_date: date,
+                com_date: comDate
             })
         }
     },
     computed: {
         sumTotal() {
-            return this.form.total_amount = this.form.quantity * this.form.quota_value
+            return this.form.total_amount = this.form.quantity * this.form.received_quota
         }
     }
 }
