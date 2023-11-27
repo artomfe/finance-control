@@ -34,6 +34,7 @@
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor por cota</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantidade</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data de Pagamento</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data Com</th>
                             </tr>
                         </thead>
@@ -44,6 +45,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ earning.received_quota }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ earning.quantity }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ earning.total_amount }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ earning.payment_date }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ earning.com_date }}</td>
                             </tr>
                         </tbody>

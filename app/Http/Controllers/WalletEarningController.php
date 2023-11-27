@@ -32,13 +32,10 @@ class WalletEarningController extends Controller
     {
         try {
             $data = $request->all();
-
-            Log::debug('Check request');
-            Log::debug($data);
         
             $this->service->saveEarning($data);
         
-            return response()->json(['message' => 'CHEGOU AQUI!']);
+            return response()->json(['message' => 'Rendimento salvo com sucesso!']);
         } catch (Exception $e) {
             Log::error('Erro ao salvar dividendos: ', $e);
             return response()->json(['message' => 'ERROR!'], 500);
