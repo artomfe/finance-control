@@ -24,11 +24,11 @@ import { Link } from '@inertiajs/vue3';
                     Cadastrar Movimentação
                 </button>
 
-                <button
+                <Link href="/selics/yields"
                     class="ml-4 bg-yellow-500 hover:bg-yellow-700 text-white py-2 px-4 rounded"
                 >
                     Cadastrar Rendimento
-                </button>
+                </Link>
 
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-8 mt-4">
                     <h1 class="text-2xl font-semibold text-center mb-4">Lista de Selics</h1>

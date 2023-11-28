@@ -9,6 +9,7 @@ use App\Http\Controllers\WalletController;
 use App\Http\Controllers\MovementController;
 use App\Http\Controllers\WalletEarningController;
 use App\Http\Controllers\SelicController;
+use App\Http\Controllers\SelicYieldController;
 use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\DashboardController;
 
@@ -69,6 +70,8 @@ Route::middleware([
 
     //Selic routes
     Route::get('/selics', [SelicController::class, 'index'])->name('selics');
+    Route::get('/selics/yields', [SelicYieldController::class, 'index'])->name('selics.yields');
+    Route::post('/selics/yields/store', [SelicYieldController::class, 'store'])->name('selics.yields.store');
 
     //Finance routes
     Route::get('/finances', [FinanceController::class, 'index'])->name('finances');

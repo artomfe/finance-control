@@ -3,64 +3,64 @@
 namespace App\Observers;
 
 use App\Models\Selic;
-use App\Models\SelicRendimento;
+use App\Models\SelicsYield;
 
 class SelicYieldObserver
 {
     /**
-     * Handle the SelicRendimento "created" event.
+     * Handle the SelicsYield "created" event.
      *
-     * @param  \App\Models\SelicRendimento $yield
+     * @param  \App\Models\SelicsYield $yield
      * @return void
      */
-    public function created(SelicRendimento $yield)
+    public function created(SelicsYield $yield)
     {
         $selic = Selic::where('id', $yield->selic_id)->first();
 
-        $selic->rendimento += $yield->valor;
+        $selic->yield += $yield->amount;
         $selic->save();
     }
 
     /**
-     * Handle the SelicRendimento "updated" event.
+     * Handle the SelicsYield "updated" event.
      *
-     * @param  \App\Models\SelicRendimento $yield
+     * @param  \App\Models\SelicsYield $yield
      * @return void
      */
-    public function updated(SelicRendimento $yield)
+    public function updated(SelicsYield $yield)
     {
         //
     }
 
     /**
-     * Handle the SelicRendimento "deleted" event.
+     * Handle the SelicsYield "deleted" event.
      *
-     * @param  \App\Models\SelicRendimento $yield
+     * @param  \App\Models\SelicsYield $yield
      * @return void
      */
-    public function deleted(SelicRendimento $yield)
+    public function deleted(SelicsYield $yield)
     {
         //
     }
 
     /**
-     * Handle the SelicRendimento "restored" event.
+     * Handle the SelicsYield "restored" event.
      *
-     * @param  \App\Models\SelicRendimento $yield
+     * @param  \App\Models\SelicsYield $yield
      * @return void
      */
-    public function restored(SelicRendimento $yield)
+    public function restored(SelicsYield $yield)
     {
         //
     }
 
     /**
-     * Handle the SelicRendimento "force deleted" event.
+     * Handle the SelicsYield "force deleted" event.
      *
-     * @param  \App\Models\SelicRendimento $yield
+     * @param  \App\Models\SelicsYield $yield
      * @return void
      */
-    public function forceDeleted(SelicRendimento $yield)
+    public function forceDeleted(SelicsYield $yield)
     {
         //
     }
