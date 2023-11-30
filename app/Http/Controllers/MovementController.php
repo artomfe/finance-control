@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MovementRequest;
 use App\Services\MovementService;
 use Inertia\Inertia;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class MovementController extends Controller
 {
@@ -26,8 +29,17 @@ class MovementController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(MovementRequest $request)
     {
-
+        try {
+            $data = $request->all();
+        
+            $this->service->saveMoviment($data);
+        
+            return response()->json(['message' => 'Movimentação salva com sucesso!']);
+        } catch (Exception $e) {
+            Log::error('Erro ao salvar movimentação: ', $e);
+            return response()->json(['message' => 'ERROR!'], 500);
+        }
     }
 }

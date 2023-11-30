@@ -6,6 +6,7 @@ use App\Models\Asset;
 use App\Models\Crypto;
 use App\Models\Wallet;
 use App\Repositories\MovementRepository;
+use Carbon\Carbon;
 
 class MovementService
 {
@@ -37,5 +38,13 @@ class MovementService
             'actives' => $actives,
             'movements' => $movements,
         ];
+    }
+
+    public function saveMoviment($data)
+    {
+        $data['movement_date'] = Carbon::createFromFormat('d/m/Y',$data['movement_date'])
+            ->format('Y-m-d');
+
+        $this->repository->create($data);
     }
 }

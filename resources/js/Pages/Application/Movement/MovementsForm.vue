@@ -17,7 +17,7 @@
                         <select class="block appearance-none w-full bg-gray-200 border border-gray-200
                                     text-gray-700 py-3 px-4 pr-8 rounded leading-tight
                                     focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="ativo" v-model="form.active_id">
+                                id="ativo" v-model="form.asset_id">
                             <option v-for="item in actives" :value="item.id" :key="item.id">
                                 {{ item.code }}
                             </option>
@@ -108,7 +108,7 @@ export default {
         return {
             form: this.$inertia.form({
                 type: this.activeType,
-                active_id: null,
+                asset_id: null,
                 wallet_id: null,
                 quantity: 0,
                 quota_value: 0,
@@ -145,7 +145,7 @@ export default {
             let date = this.form.movement_date
 
             this.form = this.$inertia.form({
-                active_id: null,
+                asset_id: null,
                 wallet_id: null,
                 quantity: 0,
                 quota_value: 0,

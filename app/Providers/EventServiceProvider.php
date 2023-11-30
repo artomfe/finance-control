@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Movement;
 use App\Models\SelicsYield;
 use App\Models\WalletsEarning;
 use App\Observers\WalletEarningObserver;
 use App\Observers\SelicYieldObserver;
+use App\Observers\MovementObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -31,6 +33,7 @@ class EventServiceProvider extends ServiceProvider
     {
         WalletsEarning::observe(WalletEarningObserver::class);
         SelicsYield::observe(SelicYieldObserver::class);
+        Movement::observe(MovementObserver::class);
     }
 
     /**

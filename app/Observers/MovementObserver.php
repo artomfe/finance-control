@@ -2,79 +2,79 @@
 
 namespace App\Observers;
 
-use App\Models\CarteiraAtivo;
-use App\Models\Movimentacao;
+use App\Models\WalletsAsset;
+use App\Models\Movement;
 
 class MovementObserver
 {
     /**
-     * Handle the Movimentacao "created" event.
+     * Handle the Movement "created" event.
      *
-     * @param  \App\Models\Movimentacao  $movement
+     * @param  \App\Models\Movement  $movement
      * @return void
      */
-    public function created(Movimentacao $movement)
+    public function created(Movement $movement)
     {
-        $wallet = CarteiraAtivo::where('ativo_id',$movement->ativo_id)
-            ->where('carteira_id',$movement->carteira_id)
+        $walletAsset = WalletsAsset::where('asset_id',$movement->asset_id)
+            ->where('wallet_id',$movement->wallet_id)
             ->first();
 
-        if(isset($wallet)) {
-            $wallet->quantidade += $movement->quantidade;
-            $wallet->total_investido +=  $movement->valor_total;
-            $wallet->preco_medio = $wallet->total_investido / $wallet->quantidade;
-            $wallet->save();
+        if(isset($walletAsset)) {
+            $walletAsset->quantity += $movement->quantity;
+            $walletAsset->total_amount +=  $movement->total_amount;
+            $walletAsset->average_price = $walletAsset->total_amount / $walletAsset->quantity;
+            $walletAsset->save();
         } else {
-            CarteiraAtivo::create([
-                'ativo_id' => $movement->ativo_id,
-                'carteira_id' => $movement->carteira_id,
-                'quantidade' => $movement->quantidade,
-                'preco_medio' => $movement->valor_cota,
-                'total_investido' => $movement->valor_total
+            WalletsAsset::create([
+                'asset_id' => $movement->asset_id,
+                'wallet_id' => $movement->wallet_id,
+                'quantity' => $movement->quantity,
+                'average_price' => $movement->quota_value,
+                'total_amount' => $movement->total_amount
             ]);
         }
     }
 
     /**
-     * Handle the Movimentacao "updated" event.
+     * Handle the Movement "updated" event.
      *
-     * @param  \App\Models\Movimentacao  $movement
+     * @param  \App\Models\Movement  $movement
      * @return void
      */
-    public function updated(Movimentacao $movement)
+    public function updated(Movement $movement)
     {
         //
     }
 
     /**
-     * Handle the Movimentacao "deleted" event.
+     * Handle the Movement "deleted" event.
      *
-     * @param  \App\Models\Movimentacao  $movement
+     * @param  \App\Models\Movement  $movement
      * @return void
      */
-    public function deleted(Movimentacao $movement)
+    public function deleted(Movement $movement)
     {
         //
     }
 
     /**
-     * Handle the Movimentacao "restored" event.
+     * Handle the Movement "restored" event.
      *
-     * @param  \App\Models\Movimentacao  $movement
+     * @param  \App\Models\Movement  $movement
      * @return void
      */
-    public function restored(Movimentacao $movement)
+    public function restored(Movement $movement)
     {
         //
     }
 
     /**
-     * Handle the Movimentacao "force deleted" event.
+     * Handle the Movement "force deleted" event.
      *
-     * @param  \App\Models\Movimentacao  $movement
+     * @param  \App\Models\Movement  $movement
      * @return void
      */
-    public function forceDeleted(Movimentacao $movement)
+    public function forceDeleted(Movement $movement)
     {
         //
     }
