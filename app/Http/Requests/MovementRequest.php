@@ -9,7 +9,8 @@ class MovementRequest extends FormRequest
     public function rules()
     {
         return [
-            'asset_id' => 'required',
+            'type' => 'required',
+            'active_id' => 'required',
             'wallet_id' => 'required',
             'movement_date' => 'required|max:15',
             'quantity' => 'required',

@@ -33,12 +33,13 @@ class MovementController extends Controller
     {
         try {
             $data = $request->all();
-        
+
             $this->service->saveMoviment($data);
         
             return response()->json(['message' => 'Movimentação salva com sucesso!']);
         } catch (Exception $e) {
-            Log::error('Erro ao salvar movimentação: ', $e);
+            Log::error('Erro ao salvar movimentação: ' );
+            Log::error($e);
             return response()->json(['message' => 'ERROR!'], 500);
         }
     }

@@ -45,6 +45,14 @@ class MovementService
         $data['movement_date'] = Carbon::createFromFormat('d/m/Y',$data['movement_date'])
             ->format('Y-m-d');
 
+        if($data['type'] == 'asset') {
+            $data['asset_id'] = $data['active_id'];
+        }
+
+        if($data['type'] == 'crypto') {
+            $data['crypto_id'] = $data['active_id'];
+        }
+
         $this->repository->create($data);
     }
 }

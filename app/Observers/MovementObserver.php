@@ -15,8 +15,16 @@ class MovementObserver
      */
     public function created(Movement $movement)
     {
+        if(isset($movement->asset_id)) {
+            $this->updateWalletAsset($movement);
+        }
+       
+    }
+
+    protected function updateWalletAsset($movement)
+    {
         $walletAsset = WalletsAsset::where('asset_id',$movement->asset_id)
-            ->where('wallet_id',$movement->wallet_id)
+            ->where('wallet_id', $movement->wallet_id)
             ->first();
 
         if(isset($walletAsset)) {
@@ -33,49 +41,5 @@ class MovementObserver
                 'total_amount' => $movement->total_amount
             ]);
         }
-    }
-
-    /**
-     * Handle the Movement "updated" event.
-     *
-     * @param  \App\Models\Movement  $movement
-     * @return void
-     */
-    public function updated(Movement $movement)
-    {
-        //
-    }
-
-    /**
-     * Handle the Movement "deleted" event.
-     *
-     * @param  \App\Models\Movement  $movement
-     * @return void
-     */
-    public function deleted(Movement $movement)
-    {
-        //
-    }
-
-    /**
-     * Handle the Movement "restored" event.
-     *
-     * @param  \App\Models\Movement  $movement
-     * @return void
-     */
-    public function restored(Movement $movement)
-    {
-        //
-    }
-
-    /**
-     * Handle the Movement "force deleted" event.
-     *
-     * @param  \App\Models\Movement  $movement
-     * @return void
-     */
-    public function forceDeleted(Movement $movement)
-    {
-        //
-    }
+    } 
 }
