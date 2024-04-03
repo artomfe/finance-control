@@ -40,7 +40,7 @@ class MovementService
         ];
     }
 
-    public function saveMoviment($data)
+    public function saveMovement($data)
     {
         $data['movement_date'] = Carbon::createFromFormat('d/m/Y',$data['movement_date'])
             ->format('Y-m-d');

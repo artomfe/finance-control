@@ -39,7 +39,7 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             <tr v-for="movement in movements.data" :key="movement.id">
-                                <td class="px-6 py-4 whitespace-nowrap">{{ movement.asset.code || movement.crypto.code }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ type == 'asset' ? movement.asset.code : movement.crypto.code }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ movement.wallet.name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ movement.quota_value }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ movement.quantity }}</td>

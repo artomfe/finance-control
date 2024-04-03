@@ -59,7 +59,7 @@
                     <input class="appearance-none block w-full bg-gray-200 text-gray-700 border
                             border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none
                             focus:bg-white focus:border-gray-500"
-                            id="quantidade" type="number" placeholder="Quantidade"
+                            id="quantidade" type="text" placeholder="Quantidade"
                             v-model="form.quantity">
                 </div>
                 <div class="w-full md:w-1/2 lg:w-1/3 px-3 mb-6  mb-2">

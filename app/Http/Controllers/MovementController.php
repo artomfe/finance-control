@@ -34,7 +34,7 @@ class MovementController extends Controller
         try {
             $data = $request->all();
 
-            $this->service->saveMoviment($data);
+            $this->service->saveMovement($data);
         
             return response()->json(['message' => 'Movimentação salva com sucesso!']);
         } catch (Exception $e) {

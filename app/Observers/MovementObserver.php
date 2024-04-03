@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\WalletsAsset;
 use App\Models\Movement;
+use App\Models\WalletsCrypto;
 
 class MovementObserver
 {
@@ -17,6 +18,10 @@ class MovementObserver
     {
         if(isset($movement->asset_id)) {
             $this->updateWalletAsset($movement);
+        }
+
+        if(isset($movement->crypto_id)) {
+            $this->updateWalletCrypto($movement);
         }
        
     }
@@ -35,6 +40,29 @@ class MovementObserver
         } else {
             WalletsAsset::create([
                 'asset_id' => $movement->asset_id,
+                'wallet_id' => $movement->wallet_id,
+                'quantity' => $movement->quantity,
+                'average_price' => $movement->quota_value,
+                'total_amount' => $movement->total_amount
+            ]);
+        }
+    } 
+
+    protected function updateWalletCrypto($movement)
+    {
+        $walletCrypto = WalletsCrypto::where('crypto_id',$movement->crypto_id)
+            ->where('wallet_id', $movement->wallet_id)
+            ->first();
+
+
+        if(isset($walletCrypto)) {
+            $walletCrypto->quantity += $movement->quantity;
+            $walletCrypto->total_amount +=  $movement->total_amount;
+            $walletCrypto->average_price = $walletCrypto->total_amount / $walletCrypto->quantity;
+            $walletCrypto->save();
+        } else {
+            WalletsAsset::create([
+                'crypto_id' => $movement->crypto_id,
                 'wallet_id' => $movement->wallet_id,
                 'quantity' => $movement->quantity,
                 'average_price' => $movement->quota_value,

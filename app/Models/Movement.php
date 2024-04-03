@@ -26,7 +26,7 @@ class Movement extends Model
 
     public function crypto()
     {
-        return $this->belongsTo(Asset::class);
+        return $this->belongsTo(Crypto::class);
     }
 
     public function wallet()
